@@ -1,28 +1,100 @@
 @model IEnumerable<CorporateWeb.Entities.News>
 @{
-    ViewData["Title"] = "Haberler & Projeler";
+    ViewData["Title"] = "Updates & Projects";
 }
 
 <div class="container my-5 py-4">
-    <div class="text-center mb-5">
-        <h1 class="display-5 fw-bold text-dark">Haberler & Projeler</h1>
-        <p class="lead text-muted">Ekibimizden en son güncellemeler ve yeni geliştirdiğimiz projeler.</p>
+    <div class="text-center mb-5 animate-fade-in">
+        <span class="badge bg-info bg-opacity-10 text-info fw-bold px-3 py-2 rounded-pill mb-2 text-uppercase tracking-wider">Engineering Ledger</span>
+        <h1 class="display-5 fw-bold text-dark tracking-tight">Latest Updates & Projects</h1>
+        <p class="lead text-muted px-4 max-w-xl mx-auto">
+            Insights, architectural milestones, and latest technical developments from my individual and collaborative build pipelines.
+        </p>
     </div>
 
     <div class="row g-4">
         @foreach (var item in Model)
         {
-            <div class="col-md-6">
-                <div class="card shadow-sm border-0 h-100 flex-column flex-lg-row overflow-hidden rounded-3">
-                    <img src="@item.ImageUrl" class="img-fluid" alt="@item.Title"
-                         style="width: 100%; max-width: 300px; object-fit: cover;">
-                    <div class="card-body p-4 d-flex flex-column justify-content-center">
-                        <span class="badge bg-dark mb-2 align-self-start">@item.CreatedDate.ToString("dd.MM.yyyy")</span>
-                        <h5 class="card-title fw-bold">@item.Title</h5>
-                        <p class="card-text text-secondary mt-2 mb-0">@item.Description</p>
+            <div class="col-12 col-xl-6">
+                <div class="card shadow-sm border border-light-subtle h-100 flex-column flex-md-row overflow-hidden rounded-4 premium-project-card">
+                    
+                    <div class="project-img-container position-relative overflow-hidden" style="min-width: 240px; max-width: 100%; min-height: 220px;">
+                        <img src="@item.ImageUrl" class="h-100 w-100 project-card-img" alt="@item.Title" style="object-fit: cover;">
+                        <div class="project-img-overlay"></div>
                     </div>
+
+                    <div class="card-body p-4 d-flex flex-column justify-content-between bg-white">
+                        <div>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="badge bg-dark bg-opacity-5 text-secondary fw-semibold font-monospace px-2 py-1 small">
+                                    ⏱️ @item.CreatedDate.ToString("MMM dd, yyyy")
+                                </span>
+                            </div>
+                            <h5 class="card-title fw-bold text-dark mb-2 tracking-tight">@item.Title</h5>
+                            <p class="card-text text-secondary small lh-relaxed">@item.Description</p>
+                        </div>
+
+                        <div class="mt-4 pt-3 border-top border-light-subtle">
+                            <a href="https://github.com/akdenizenes" target="_blank" class="d-flex align-items-center justify-content-between text-decoration-none action-layer">
+                                <span class="text-info small fw-bold tracking-wider text-uppercase font-monospace" style="font-size: 0.75rem;">Explore Project</span>
+                                <div class="arrow-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-short text-info transition-transform custom-arrow" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         }
     </div>
 </div>
+
+<style>
+    .tracking-tight {
+        letter-spacing: -0.02em;
+    }
+    .tracking-wider {
+        letter-spacing: 0.06em;
+    }
+    .font-monospace {
+        font-family: var(--bs-font-monospace);
+    }
+    .max-w-xl {
+        max-width: 36rem;
+    }
+
+    /* Premium Card Engineering */
+    .premium-project-card {
+        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+    .premium-project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07) !important;
+        border-color: rgba(13, 202, 240, 0.25) !important;
+        cursor: pointer;
+    }
+
+    /* Image Transitions */
+    .project-card-img {
+        transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    .premium-project-card:hover .project-card-img {
+        transform: scale(1.04);
+    }
+
+    /* Micro-Interactions for Arrow */
+    .custom-arrow {
+        transition: transform 0.3s ease;
+    }
+    .premium-project-card:hover .custom-arrow {
+        transform: translateX(4px);
+    }
+    
+    /* Action Link Hover Transition */
+    .action-layer:hover .text-info {
+        color: #0bacd0 !important;
+    }
+</style>

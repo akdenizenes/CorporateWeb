@@ -1,0 +1,114 @@
+@{
+    ViewData["Title"] = "Admin Control Panel";
+}
+
+<div class="container my-5 pt-4">
+    <div class="d-flex align-items-center justify-content-between mb-4 pb-2 border-bottom">
+        <div>
+            <span class="badge bg-danger bg-opacity-10 text-danger fw-bold px-3 py-2 rounded-pill mb-2 text-uppercase font-monospace style-micro">Management</span>
+            <h1 class="display-6 fw-bold text-dark tracking-tight m-0">System Control Panel</h1>
+        </div>
+        <p class="text-muted small font-monospace m-0">Logged in as Administrator</p>
+    </div>
+
+    <div class="card shadow-sm border border-light-subtle rounded-4 mb-5 overflow-hidden">
+        <div class="card-header bg-dark text-white p-3 d-flex align-items-center gap-2">
+            <h5 class="m-0 fw-bold font-monospace small text-uppercase tracking-wider">📄 Dynamic Pages Configuration</h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 bg-white">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 80px;" class="text-center font-monospace small text-muted">ID</th>
+                        <th class="font-monospace small text-muted">Page Title</th>
+                        <th style="width: 150px;" class="text-center font-monospace small text-muted">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.Pages != null)
+                    {
+                        foreach (var pItem in ViewBag.Pages)
+                        {
+                            <tr>
+                                <td class="text-center font-monospace text-secondary small fw-bold">@pItem.Id</td>
+                                <td><span class="fw-bold text-dark">@pItem.Title</span></td>
+                                <td class="text-center"><a href="/Admin/EditPage/@pItem.Id" class="btn btn-sm btn-outline-primary px-3 rounded-pill fw-bold font-monospace style-btn-text">Edit</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border border-light-subtle rounded-4 mb-5 overflow-hidden">
+        <div class="card-header bg-dark text-white p-3 d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center gap-2">
+                <h5 class="m-0 fw-bold font-monospace small text-uppercase tracking-wider">📡 Updates & Insights Feed</h5>
+            </div>
+            <a href="/Admin/CreateNews" class="btn btn-sm btn-info text-white fw-bold font-monospace style-btn-text rounded-pill px-3">+ Add New Insight</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 bg-white">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 80px;" class="text-center font-monospace small text-muted">ID</th>
+                        <th class="font-monospace small text-muted">Feed Item Title</th>
+                        <th style="width: 150px;" class="text-center font-monospace small text-muted">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.News != null)
+                    {
+                        foreach (var item in ViewBag.News)
+                        {
+                            <tr>
+                                <td class="text-center font-monospace text-secondary small fw-bold">@item.Id</td>
+                                <td><span class="fw-bold text-dark">@item.Title</span></td>
+                                <td class="text-center"><a href="/Admin/EditNews/@item.Id" class="btn btn-sm btn-outline-primary px-3 rounded-pill fw-bold font-monospace style-btn-text">Edit</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border border-light-subtle rounded-4 overflow-hidden">
+        <div class="card-header bg-dark text-white p-3 d-flex align-items-center gap-2">
+            <h5 class="m-0 fw-bold font-monospace small text-uppercase tracking-wider">⚙️ Core Services Configuration</h5>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 bg-white">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 80px;" class="text-center font-monospace small text-muted">ID</th>
+                        <th class="font-monospace small text-muted">Service Title</th>
+                        <th style="width: 150px;" class="text-center font-monospace small text-muted">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.Services != null)
+                    {
+                        foreach (var sItem in ViewBag.Services)
+                        {
+                            <tr>
+                                <td class="text-center font-monospace text-secondary small fw-bold">@sItem.Id</td>
+                                <td><span class="fw-bold text-dark">@sItem.Title</span></td>
+                                <td class="text-center"><a href="/Admin/EditService/@sItem.Id" class="btn btn-sm btn-outline-primary px-3 rounded-pill fw-bold font-monospace style-btn-text">Edit</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .tracking-tight { letter-spacing: -0.02em; }
+    .tracking-wider { letter-spacing: 0.06em; }
+    .style-micro { font-size: 0.7rem; letter-spacing: 0.04em; }
+    .style-btn-text { font-size: 0.75rem; transition: all 0.2s ease; }
+    .table-hover tbody tr:hover { background-color: rgba(0, 0, 0, 0.01); }
+</style>

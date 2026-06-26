@@ -1,17 +1,68 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CorporateWeb</title>
+
+    <!-- Professional Typography (Inter Font) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5.3.2 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Global Custom Styles to Break Ordinariness -->
+    <style>
+            body {
+                font-family: 'Inter', sans-serif;
+                letter-spacing: -0.01em;
+            }
+
+            /* Smooth transitions for links and buttons */
+            .nav-link,
+            .btn,
+            .card {
+                transition: all 0.25s ease-in-out;
+            }
+
+            /* Custom scrollbar for modern feel */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: #f1f1f1;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: #a8a8a8;
+                border-radius: 4px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #787878;
+            }
+    </style>
 </head>
-<body class="d-flex flex-column min-vh-100 bg-light">
+
+<body class="d-flex flex-column min-vh-100 bg-light text-dark">
+
+    <!-- Global Header / Navigation -->
     <partial name="_NavbarPartial" />
-    <main role="main" class="flex-grow-1">
+
+    <!-- Main Content Area -->
+    <main role="main" class="flex-grow-1 animate-fade-in">
         @RenderBody()
     </main>
+
+    <!-- Global Footer -->
     <partial name="_FooterPartial" />
+
+    <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

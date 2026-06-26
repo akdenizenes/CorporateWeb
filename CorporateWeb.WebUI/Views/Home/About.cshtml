@@ -1,39 +1,107 @@
 @model CorporateWeb.Entities.Page
 @{
-    ViewData["Title"] = "Hakkımda";
+    ViewData["Title"] = "About Me";
 }
 
-<div class="container my-5 py-4">
-    <div class="row align-items-center">
-        <div class="col-md-5 mb-4 mb-md-0">
-            <img src="~/img/yapay.jpg" class="img-fluid rounded-3 shadow-lg" alt="Geliştirici Profil">
+<div class="container my-5 py-5 position-relative">
+    <!-- Ambient Light Shadow -->
+    <div class="position-absolute top-25 start-0 bg-info opacity-10 rounded-circle" style="width: 280px; height: 280px; filter: blur(90px); z-index: -1;"></div>
+
+    <div class="row align-items-center gy-5">
+        <!-- Showcase Column: Image + Realistic Engineering Metrics -->
+        <div class="col-lg-5 text-center px-4">
+            <div class="profile-img-wrapper position-relative d-inline-block rounded-4 shadow-lg mb-4">
+                <img src="~/img/yapay.jpg" class="img-fluid main-profile-img"
+                     alt="Developer Profile" style="max-height: 420px; object-fit: cover; width: 100%;">
+                <div class="profile-img-overlay"></div>
+            </div>
+            
+            <!-- Hardcore Engineering Metrics Sub-Row -->
+            <div class="row g-2 mt-2 justify-content-center">
+                <div class="col-4">
+                    <div class="bg-white p-3 rounded-3 shadow-sm border border-light-subtle transition-lift">
+                        <span class="d-block fw-bold text-info fs-5">Mobile</span>
+                        <small class="text-muted text-uppercase font-monospace style-micro">Flutter & Dart</small>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="bg-white p-3 rounded-3 shadow-sm border border-light-subtle transition-lift">
+                        <span class="d-block fw-bold text-dark fs-5">Backend</span>
+                        <small class="text-muted text-uppercase font-monospace style-micro">.NET Ecosystem</small>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="bg-white p-3 rounded-3 shadow-sm border border-light-subtle transition-lift">
+                        <span class="d-block fw-bold text-dark fs-5">GenAI</span>
+                        <small class="text-muted text-uppercase font-monospace style-micro">Vertex AI SDK</small>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-7 ps-md-5">
-            <h1 class="display-5 fw-bold mb-3 text-dark">Merhaba, Ben Enes Akdeniz</h1>
-            <h4 class="text-secondary mb-4">Yazılım Mühendisliği Öğrencisi & Geliştirici</h4>
 
-            <p class="lead">
-                Muğla Sıtkı Koçman Üniversitesi'nde %100 İngilizce Yazılım Mühendisliği 3. sınıf öğrencisiyim ve şu anda
-                MUSKİ bünyesinde yazılım mühendisliği stajyeriyim.
+        <!-- Bio Information Column -->
+        <div class="col-lg-7 ps-lg-5">
+            <span class="badge bg-info bg-opacity-10 text-info fw-bold px-3 py-2 rounded-pill mb-3 text-uppercase tracking-wider">Engineering Persona</span>
+            <h1 class="display-5 fw-extrabold mb-3 text-dark tracking-tight">Hi, I'm Enes Akdeniz</h1>
+            <h4 class="text-secondary mb-4 font-monospace fw-normal">Software Engineering Student & Developer</h4>
+
+            <p class="lead text-muted lh-base fs-5">
+                I am a 3rd-year Software Engineering student at Muğla Sıtkı Koçman University (100% English curriculum)
+                and currently accelerating my professional journey as a Software Engineering Intern at MUSKİ.
             </p>
-            <p>
-                Mobil uygulama geliştirme tarafında <strong>Flutter ve Dart</strong> teknolojileriyle çapraz platform
-                çözümler üretiyorum. Projelerimi sadece kodlamakla kalmıyor; <strong>Google Gemini ve Firebase Vertex AI
-                SDK</strong> gibi modern yapay zeka ve bulut teknolojilerini sistemlerime entegre ederek geleceğin
-                dijital ürünlerini tasarlıyorum.
+            <p class="text-secondary lh-lg">
+                Driven by a passion for cross-platform mobile app development, I build robust, seamless solutions using the
+                <strong>Flutter and Dart</strong> ecosystem. I don't just write code; I actively engineer
+                next-generation digital products by architecting and integrating modern Generative AI and cloud
+                ecosystems, specifically utilizing <strong>Google Gemini</strong> models and the <strong>Firebase Vertex AI SDK</strong>.
             </p>
-            <p>
-                StudioMatematik web projesinin yönetim süreçlerinden, omuz omuza çalıştığımız ekibimizle co-developer
-                olarak geliştirdiğimiz NotKolik AI projesine kadar birçok farklı mimaride aktif rol alıyorum.
+            <p class="text-secondary lh-lg">
+                My architectural contributions span from orchestrating management systems for the
+                <strong>StudioMatematik</strong> web platform, to working collaboratively as a co-developer on
+                <strong>NotKolik AI</strong>—a tailored project implementing advanced data flows and AI capabilities.
             </p>
 
+            <!-- Tech Stack Badges -->
+            <div class="mt-4 d-flex flex-wrap gap-2">
+                <span class="badge bg-dark bg-opacity-75 text-white font-monospace px-3 py-2 tech-badge">#Flutter</span>
+                <span class="badge bg-dark bg-opacity-75 text-white font-monospace px-3 py-2 tech-badge">#Dart</span>
+                <span class="badge bg-dark bg-opacity-75 text-white font-monospace px-3 py-2 tech-badge">#.NET-Core</span>
+                <span class="badge bg-dark bg-opacity-75 text-white font-monospace px-3 py-2 tech-badge">#Google-Gemini</span>
+                <span class="badge bg-dark bg-opacity-75 text-white font-monospace px-3 py-2 tech-badge">#VertexAI</span>
+            </div>
+
+            <!-- Dynamic Section Back Online! -->
             @if (Model != null)
             {
-                <div class="alert alert-dark mt-4 border-0 shadow-sm" role="alert">
-                    <h5 class="fw-bold">@Model.Title</h5>
-                    <p class="mb-0">@Model.Description</p>
+                <div class="card mt-4 border-start border-info border-4 border-top-0 border-end-0 border-bottom-0 shadow-sm bg-dark text-white p-4 rounded-3">
+                    <h5 class="fw-bold text-info mb-2 tracking-tight">@Model.Title</h5>
+                    <p class="mb-0 text-white-50 small lh-relaxed">@Model.Description</p>
                 </div>
             }
         </div>
     </div>
 </div>
+
+<!-- Premium Scoped Styles -->
+<style>
+    .fw-extrabold { font-weight: 800; }
+    .tracking-tight { letter-spacing: -0.02em; }
+    .tracking-wider { letter-spacing: 0.08em; }
+    .style-micro { font-size: 0.65rem; letter-spacing: 0.02em; font-weight: 600; }
+    .font-monospace { font-family: var(--bs-font-monospace); }
+
+    .profile-img-wrapper { overflow: hidden; }
+    .main-profile-img { transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); }
+    .profile-img-overlay {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(180deg, rgba(13, 202, 240, 0) 50%, rgba(15, 23, 42, 0.2) 100%);
+        pointer-events: none;
+    }
+    .profile-img-wrapper:hover .main-profile-img { transform: scale(1.04); }
+
+    .tech-badge { transition: all 0.2s ease; }
+    .tech-badge:hover { background-color: #0dcaf0 !important; color: #000000 !important; transform: translateY(-2px); }
+
+    .transition-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .transition-lift:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05) !important; }
+</style>
