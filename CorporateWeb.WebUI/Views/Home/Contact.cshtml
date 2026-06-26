@@ -1,0 +1,69 @@
+@{
+    ViewData["Title"] = "İletişim";
+}
+
+<div class="container my-5 py-4">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold">İletişime Geçin</h1>
+        <p class="lead text-muted">Projeleriniz, staj ve iş fırsatları veya sadece teknoloji üzerine sohbet etmek için
+            bana ulaşabilirsiniz.</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-5 mb-4">
+                <div class="card h-100 border-0 shadow-sm bg-dark text-white p-4">
+                    <h4 class="fw-bold mb-4">İletişim Bilgileri</h4>
+                    <ul class="list-unstyled fs-5">
+                        <li class="mb-4">
+                            <strong>📍 Konum:</strong><br>
+                            Ereğli, Zonguldak <br>
+                            <span class="text-muted fs-6">(Eğitim & Staj Dönemi: Kötekli, Muğla)</span>
+                        </li>
+                        <li class="mb-4">
+                            <strong>📧 E-Posta:</strong><br>
+                            <a href="mailto:enesakdeniz306@gmail.com"
+                               class="text-info text-decoration-none">enesakdeniz306@gmail.com</a>
+                        </li>
+                        <li class="mb-4">
+                            <strong>💼 LinkedIn:</strong><br>
+                            <a href="https://www.linkedin.com/in/enes-akdeniz-a5267a386/" target="_blank"
+                               class="text-info text-decoration-none">linkedin.com/in/enes-akdeniz-a5267a386</a>
+                        </li>
+                        <li class="mb-3">
+                            <strong>🐙 GitHub:</strong><br>
+                            <a href="https://github.com/akdenizenes" target="_blank"
+                               class="text-info text-decoration-none">github.com/akdenizenes</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="card border-0 shadow-sm p-4 h-100">
+                    <form method="post" asp-action="Contact" asp-controller="Home">
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="alert alert-@ViewBag.AlertType shadow-sm mb-4">
+                                @ViewBag.Message
+                            </div>
+                        }
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Adınız Soyadınız</label>
+                            <input type="text" class="form-control" name="name" placeholder="Ad Soyad" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">E-Posta Adresiniz</label>
+                            <input type="email" class="form-control" name="email" placeholder="ornek@mail.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Mesajınız</label>
+                            <textarea class="form-control" name="message" rows="4" placeholder="Mesajınızı buraya yazın..."
+                                      required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100 fw-bold">Mesaj Gönder</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

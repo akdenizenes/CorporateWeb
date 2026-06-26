@@ -1,0 +1,39 @@
+@model CorporateWeb.Entities.Page
+@{
+    ViewData["Title"] = "Hakkımda";
+}
+
+<div class="container my-5 py-4">
+    <div class="row align-items-center">
+        <div class="col-md-5 mb-4 mb-md-0">
+            <img src="~/img/yapay.jpg" class="img-fluid rounded-3 shadow-lg" alt="Geliştirici Profil">
+        </div>
+        <div class="col-md-7 ps-md-5">
+            <h1 class="display-5 fw-bold mb-3 text-dark">Merhaba, Ben Enes Akdeniz</h1>
+            <h4 class="text-secondary mb-4">Yazılım Mühendisliği Öğrencisi & Geliştirici</h4>
+
+            <p class="lead">
+                Muğla Sıtkı Koçman Üniversitesi'nde %100 İngilizce Yazılım Mühendisliği 3. sınıf öğrencisiyim ve şu anda
+                MUSKİ bünyesinde yazılım mühendisliği stajyeriyim.
+            </p>
+            <p>
+                Mobil uygulama geliştirme tarafında <strong>Flutter ve Dart</strong> teknolojileriyle çapraz platform
+                çözümler üretiyorum. Projelerimi sadece kodlamakla kalmıyor; <strong>Google Gemini ve Firebase Vertex AI
+                SDK</strong> gibi modern yapay zeka ve bulut teknolojilerini sistemlerime entegre ederek geleceğin
+                dijital ürünlerini tasarlıyorum.
+            </p>
+            <p>
+                StudioMatematik web projesinin yönetim süreçlerinden, omuz omuza çalıştığımız ekibimizle co-developer
+                olarak geliştirdiğimiz NotKolik AI projesine kadar birçok farklı mimaride aktif rol alıyorum.
+            </p>
+
+            @if (Model != null)
+            {
+                <div class="alert alert-dark mt-4 border-0 shadow-sm" role="alert">
+                    <h5 class="fw-bold">@Model.Title</h5>
+                    <p class="mb-0">@Model.Description</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
