@@ -1,0 +1,43 @@
+@{
+    Layout = null; // Şimdilik sitenin genel tasarımını almasın, sade bir sayfa olsun
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Girişi</title>
+</head>
+<body style="background-color: #212529; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif;">
+
+    <div style="background: #ffffff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); width: 100%; max-width: 320px; text-align: center;">
+        
+        <h2 style="margin-top: 0; margin-bottom: 20px; color: #333;">Admin Paneli</h2>
+        
+        @if (ViewBag.Error != null)
+        {
+            <div style="color: #dc3545; background-color: #f8d7da; padding: 10px; border-radius: 4px; margin-bottom: 15px; font-size: 14px;">
+                @ViewBag.Error
+            </div>
+        }
+
+        <form method="post" action="/Account/Login">
+            <div style="margin-bottom: 15px;">
+                <input type="text" name="username" placeholder="Kullanıcı Adı" required 
+                       style="padding: 10px; width: 100%; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;" />
+            </div>
+            <div style="margin-bottom: 20px;">
+                <input type="password" name="password" placeholder="Şifre" required 
+                       style="padding: 10px; width: 100%; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;" />
+            </div>
+            <button type="submit" 
+                    style="background-color: #0d6efd; color: white; padding: 10px; width: 100%; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold;">
+                Giriş Yap
+            </button>
+        </form>
+
+    </div>
+
+</body>
+</html>

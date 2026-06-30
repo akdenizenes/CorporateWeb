@@ -1,11 +1,15 @@
+using Microsoft.AspNetCore.Authorization; 
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CorporateWeb.DataAccess;
 using System.Threading.Tasks;
-using CorporateWeb.Entities; // Eğer hata verirse bunu silersin aga, sorun yok
+using CorporateWeb.Entities; 
 
 namespace CorporateWeb.WebUI.Controllers
 {
+    // 2. KİLİDİ BURAYA KOYUYORUZ (Tüm Controller'ı korumaya alır)
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly CorporateDbContext _context;
