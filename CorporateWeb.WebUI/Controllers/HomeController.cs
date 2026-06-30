@@ -1,6 +1,7 @@
 using CorporateWeb.DataAccess;
 using CorporateWeb.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration; // BUNU EKLEDİK (appsettings.json'ı okuyabilmek için gerekli kütüphane)
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -10,10 +11,13 @@ namespace CorporateWeb.WebUI.Controllers
     public class HomeController : Controller
     {
         private readonly CorporateDbContext _context;
+        private readonly IConfiguration _configuration; // BUNU EKLEDİK (Bağımlılığı tanımladık)
 
-        public HomeController(CorporateDbContext context)
+        // CONSTRUCTOR'I GÜNCELLEDİK (IConfiguration'ı içeri aldık)
+        public HomeController(CorporateDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         // GET: /Home/Index
@@ -47,8 +51,9 @@ namespace CorporateWeb.WebUI.Controllers
         {
             try
             {
-                var senderEmail = "enesakdeniz306@gmail.com";
-                var senderPassword = "eanojqureumvbikx";
+                // VERİLERİ ARTIK SABİT YAZMAK YERİNE APPSETTINGS.JSON'DAN ÇEKİYORUZ
+                var senderEmail = _configuration["EmailSettings:SenderEmail"];
+                var senderPassword = _configuration["EmailSettings:SenderPassword"];
 
                 var mail = new MailMessage();
                 mail.From = new MailAddress(senderEmail);

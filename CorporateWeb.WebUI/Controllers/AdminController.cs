@@ -50,7 +50,7 @@ namespace CorporateWeb.WebUI.Controllers
         }
         #endregion
 
-        #region News İşlemleri (Create & Edit)
+#region News İşlemleri (Create & Edit)
         
         [HttpGet]
         public IActionResult CreateNews()
@@ -60,7 +60,8 @@ namespace CorporateWeb.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken] 
-        public async Task<IActionResult> CreateNews(string title, string description, string imageUrl, DateTime createdDate)
+        // Parametrelere 'bool isActive' eklendi
+        public async Task<IActionResult> CreateNews(string title, string description, string imageUrl, DateTime createdDate, bool isActive)
         {
             if (string.IsNullOrEmpty(imageUrl))
             {
@@ -77,7 +78,8 @@ namespace CorporateWeb.WebUI.Controllers
                 Title = title, 
                 Description = description,
                 ImageUrl = imageUrl,
-                CreatedDate = createdDate
+                CreatedDate = createdDate,
+                IsActive = isActive // Arayüzden gelen şalter verisini veritabanına işliyoruz EKLENDİ
             };
 
             await _context.News.AddAsync(newInsight);
@@ -95,7 +97,8 @@ namespace CorporateWeb.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditNews(int id, string title, string description, string imageUrl, DateTime createdDate)
+        // Parametrelere 'bool isActive' eklendi
+        public async Task<IActionResult> EditNews(int id, string title, string description, string imageUrl, DateTime createdDate, bool isActive)
         {
             var newsItem = await _context.News.FindAsync(id);
             if (newsItem == null) return NotFound();
@@ -110,6 +113,7 @@ namespace CorporateWeb.WebUI.Controllers
             }
             
             newsItem.CreatedDate = createdDate;
+            newsItem.IsActive = isActive; // Şalterin güncel durumunu veritabanına yazıyoruz EKLENDİ
 
             _context.News.Update(newsItem);
             await _context.SaveChangesAsync();

@@ -27,7 +27,7 @@
                         <div>
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <span class="badge bg-dark bg-opacity-5 text-secondary fw-semibold font-monospace px-2 py-1 small">
-                                    ⏱️ @item.CreatedDate.ToString("MMM dd, yyyy")
+                                    ⏱️ @item.CreatedDate.ToString("MMM dd, yyyy", new System.Globalization.CultureInfo("en-US"))
                                 </span>
                             </div>
                             <h5 class="card-title fw-bold text-dark mb-2 tracking-tight">@item.Title</h5>
