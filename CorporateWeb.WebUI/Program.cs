@@ -50,7 +50,15 @@ using (var scope = app.Services.CreateScope()) {
     }
 }
 
-app.UseStaticFiles();
+// Statik dosya izinleri (Flutter oyununun .wasm dosyalarını okuyabilmesi için)
+var provider = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
+provider.Mappings[".wasm"] = "application/wasm";
+provider.Mappings[".mjs"] = "text/javascript";
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    ContentTypeProvider = provider
+});
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

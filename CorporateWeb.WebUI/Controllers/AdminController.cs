@@ -1,14 +1,13 @@
-using Microsoft.AspNetCore.Authorization; 
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CorporateWeb.DataAccess;
 using System.Threading.Tasks;
-using CorporateWeb.Entities; 
+using CorporateWeb.Entities;
+using System; // DateTime kullanımı için gerekli
 
 namespace CorporateWeb.WebUI.Controllers
 {
-    // 2. KİLİDİ BURAYA KOYUYORUZ (Tüm Controller'ı korumaya alır)
     [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
@@ -19,19 +18,16 @@ namespace CorporateWeb.WebUI.Controllers
             _context = context;
         }
 
-        // Admin Paneli Ana Ekranı (Services Tablosu da eklendi!)
         public async Task<IActionResult> Index()
         {
             ViewBag.Pages = await _context.Pages.ToListAsync();
             ViewBag.News = await _context.News.ToListAsync();
-            
-            // Eğer DbSet adın Services değilse burayı db'deki isme göre düzeltirsin knk
-            ViewBag.Services = await _context.Services.ToListAsync(); 
+            ViewBag.Services = await _context.Services.ToListAsync();
             
             return View();
         }
 
-        #region Page Düzenleme (Hakkında vs.)
+        #region Page Düzenleme
         [HttpGet]
         public async Task<IActionResult> EditPage(int id)
         {
@@ -56,24 +52,34 @@ namespace CorporateWeb.WebUI.Controllers
 
         #region News İşlemleri (Create & Edit)
         
-        // YENİ: Proje/Haber Ekleme Ekranı
         [HttpGet]
         public IActionResult CreateNews()
         {
             return View();
         }
 
-        // YENİ: Proje/Haber Kaydetme (POST)
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateNews(string title, string description)
+        [ValidateAntiForgeryToken] 
+        public async Task<IActionResult> CreateNews(string title, string description, string imageUrl, DateTime createdDate)
         {
+            if (string.IsNullOrEmpty(imageUrl))
+            {
+                imageUrl = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop";
+            }
+
+            if (createdDate == default)
+            {
+                createdDate = DateTime.Now;
+            }
+
             var newInsight = new News 
             { 
                 Title = title, 
-                Description = description 
-                // Eğer veritabanında Date gibi zorunlu alanlar varsa buraya ekleriz
+                Description = description,
+                ImageUrl = imageUrl,
+                CreatedDate = createdDate
             };
+
             await _context.News.AddAsync(newInsight);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -89,20 +95,29 @@ namespace CorporateWeb.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditNews(int id, string title, string description)
+        public async Task<IActionResult> EditNews(int id, string title, string description, string imageUrl, DateTime createdDate)
         {
             var newsItem = await _context.News.FindAsync(id);
             if (newsItem == null) return NotFound();
+
             newsItem.Title = title;
             newsItem.Description = description;
+            
+            // Eğer yeni resim URL'si boş gelirse eskisini koru
+            if (!string.IsNullOrEmpty(imageUrl))
+            {
+                newsItem.ImageUrl = imageUrl;
+            }
+            
+            newsItem.CreatedDate = createdDate;
+
             _context.News.Update(newsItem);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
         #endregion
 
-        #region Service Düzenleme (Web Development, GenAI vs.)
-        
+        #region Service Düzenleme
         [HttpGet]
         public async Task<IActionResult> EditService(int id)
         {
