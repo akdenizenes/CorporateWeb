@@ -33,7 +33,7 @@ A dynamic, N-Tier architecture web application designed to serve as both a corpo
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/akdenizenes/CorporateWeb.git](https://github.com/akdenizenes/CorporateWeb.git)
+    git clone https://github.com/akdenizenes/CorporateWeb.git https://github.com/akdenizenes/CorporateWeb.git
     cd CorporateWeb
     ```
 2.  **Restore dependencies:**
