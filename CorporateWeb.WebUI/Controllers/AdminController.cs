@@ -65,7 +65,7 @@ namespace CorporateWeb.WebUI.Controllers
         {
             if (string.IsNullOrEmpty(imageUrl))
             {
-                imageUrl = "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop";
+                imageUrl = "/img/match3-news.png";
             }
 
             if (createdDate == default)
