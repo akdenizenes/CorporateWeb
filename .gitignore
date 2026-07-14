@@ -31,6 +31,7 @@ artifacts/
 wwwroot/lib/
 
 # Secrets & local config (DO NOT COMMIT REAL CREDENTIALS)
+CorporateWeb.WebUI/appsettings.json
 appsettings.Development.json
 appsettings.Production.json
 appsettings.*.local.json
