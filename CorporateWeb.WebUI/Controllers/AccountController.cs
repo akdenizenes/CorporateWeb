@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using CorporateWeb.Entities; // AppUser sınıfının olduğu yer (gerekirse değiştir)
+using CorporateWeb.Entities; // Namespace where the AppUser class lives (change if needed)
 using System.Threading.Tasks;
 
 namespace CorporateWeb.WebUI.Controllers
@@ -23,16 +23,16 @@ namespace CorporateWeb.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password)
         {
-            // Veritabanındaki şifreyle eşleştirme yapıyor
+            // Match the provided password against the one stored in the database
             var result = await _signInManager.PasswordSignInAsync(username, password, isPersistent: false, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
-                // Giriş başarılı, Admin paneline geç
+                // Login succeeded, redirect to the Admin panel
                 return RedirectToAction("Index", "Admin");
             }
 
-            ViewBag.Error = "Kullanıcı adı veya şifre yanlış aga!";
+            ViewBag.Error = "Invalid username or password.";
             return View();
         }
     }

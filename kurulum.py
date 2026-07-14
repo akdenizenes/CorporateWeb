@@ -2,17 +2,17 @@ import os
 import subprocess
 
 def run_command(command):
-    print(f"Çalıştırılıyor: {command}")
+    print(f"Running: {command}")
     subprocess.run(command, shell=True, check=True)
 
 def write_file(filepath, content):
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(content.strip())
-    print(f"Oluşturuldu: {filepath}")
+    print(f"Created: {filepath}")
 
-# 1. Proje ve Katmanların Oluşturulması
-print("--- .NET Projeleri Oluşturuluyor ---")
+# 1. Create the solution and the layered projects
+print("--- Creating .NET Projects ---")
 commands = [
     "dotnet new sln -n CorporateWeb",
     "dotnet new classlib -n CorporateWeb.Entities -f net8.0",
@@ -28,7 +28,7 @@ commands = [
     "dotnet add CorporateWeb.Business/CorporateWeb.Business.csproj reference CorporateWeb.Entities/CorporateWeb.Entities.csproj",
     "dotnet add CorporateWeb.WebUI/CorporateWeb.WebUI.csproj reference CorporateWeb.Business/CorporateWeb.Business.csproj",
     "dotnet add CorporateWeb.WebUI/CorporateWeb.WebUI.csproj reference CorporateWeb.Entities/CorporateWeb.Entities.csproj",
-    # MySQL ve Identity Paketleri
+    # MySQL and Identity packages
     "dotnet add CorporateWeb.DataAccess package Pomelo.EntityFrameworkCore.MySql -v 8.0.2",
     "dotnet add CorporateWeb.DataAccess package Microsoft.AspNetCore.Identity.EntityFrameworkCore -v 8.0.0",
     "dotnet add CorporateWeb.WebUI package Microsoft.EntityFrameworkCore.Design -v 8.0.0",
@@ -38,8 +38,8 @@ commands = [
 for cmd in commands:
     run_command(cmd)
 
-# 2. Kodların Dosyalara Yazılması
-print("\n--- C# Kodları Dosyalara Yazılıyor ---")
+# 2. Write the source code to files
+print("\n--- Writing C# Code to Files ---")
 
 # Entities
 write_file("CorporateWeb.Entities/BaseEntity.cs", """
@@ -203,7 +203,7 @@ write_file("CorporateWeb.WebUI/appsettings.json", """
   },
   "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;Database=CorporateWebDb;Uid=root;Pwd=sifren;"
+    "DefaultConnection": "Server=localhost;Port=3306;Database=CorporateWebDb;Uid=root;Pwd=your_password;"
   }
 }
 """)
@@ -257,7 +257,7 @@ using (var scope = app.Services.CreateScope()) {
             }
         }
     } catch (Exception ex) {
-        Console.WriteLine($"Veritabanı Hatası: {ex.Message}");
+        Console.WriteLine($"Database Error: {ex.Message}");
     }
 }
 
@@ -269,7 +269,7 @@ app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Inde
 app.Run();
 """)
 
-# Fazlalık varsayılan Class1.cs dosyalarını silme
+# Remove the default boilerplate Class1.cs files
 try:
     os.remove("CorporateWeb.Entities/Class1.cs")
     os.remove("CorporateWeb.DataAccess/Class1.cs")
@@ -277,5 +277,5 @@ try:
 except:
     pass
 
-print("\n🚀 BÜTÜN PROJE BAŞARIYLA KURULDU!")
-print("Sadece WebUI klasörüne girip appsettings.json içindeki veritabanı şifreni düzelt, ardından 'dotnet run' ile çalıştır!")
+print("\n🚀 THE ENTIRE PROJECT HAS BEEN SET UP SUCCESSFULLY!")
+print("Just enter the WebUI folder, set your database password in appsettings.json, then run it with 'dotnet run'.")

@@ -1,6 +1,49 @@
-bin/
-obj/
-*.user
-*.lock
-appsettings.json
+# Build results
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]uild/
+bld/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio / Rider / VS Code
 .vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userprefs
+*.userosscache
+*.sln.docstates
+
+# .NET
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.nupkg
+*.snupkg
+
+# ASP.NET
+wwwroot/lib/
+
+# Secrets & local config (DO NOT COMMIT REAL CREDENTIALS)
+appsettings.Development.json
+appsettings.Production.json
+appsettings.*.local.json
+secrets.json
+*.env
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db

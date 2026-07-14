@@ -1,7 +1,7 @@
 using CorporateWeb.DataAccess;
 using CorporateWeb.WebUI.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration; // BUNU EKLEDİK (appsettings.json'ı okuyabilmek için gerekli kütüphane)
+using Microsoft.Extensions.Configuration; // Required to read values from appsettings.json
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -11,9 +11,9 @@ namespace CorporateWeb.WebUI.Controllers
     public class HomeController : Controller
     {
         private readonly CorporateDbContext _context;
-        private readonly IConfiguration _configuration; // BUNU EKLEDİK (Bağımlılığı tanımladık)
+        private readonly IConfiguration _configuration; // Injected configuration dependency
 
-        // CONSTRUCTOR'I GÜNCELLEDİK (IConfiguration'ı içeri aldık)
+        // Constructor updated to inject IConfiguration
         public HomeController(CorporateDbContext context, IConfiguration configuration)
         {
             _context = context;
@@ -51,7 +51,7 @@ namespace CorporateWeb.WebUI.Controllers
         {
             try
             {
-                // VERİLERİ ARTIK SABİT YAZMAK YERİNE APPSETTINGS.JSON'DAN ÇEKİYORUZ
+                // Credentials are pulled from appsettings.json instead of being hard-coded
                 var senderEmail = _configuration["EmailSettings:SenderEmail"];
                 var senderPassword = _configuration["EmailSettings:SenderPassword"];
 

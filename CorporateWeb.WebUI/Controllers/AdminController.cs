@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using CorporateWeb.DataAccess;
 using System.Threading.Tasks;
 using CorporateWeb.Entities;
-using System; // DateTime kullanımı için gerekli
+using System; // Required for DateTime usage
 
 namespace CorporateWeb.WebUI.Controllers
 {
@@ -27,7 +27,7 @@ namespace CorporateWeb.WebUI.Controllers
             return View();
         }
 
-        #region Page Düzenleme
+        #region Page Editing
         [HttpGet]
         public async Task<IActionResult> EditPage(int id)
         {
@@ -50,7 +50,7 @@ namespace CorporateWeb.WebUI.Controllers
         }
         #endregion
 
-#region News İşlemleri (Create & Edit)
+#region News Operations (Create & Edit)
         
         [HttpGet]
         public IActionResult CreateNews()
@@ -60,7 +60,7 @@ namespace CorporateWeb.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken] 
-        // Parametrelere 'bool isActive' eklendi
+        // 'bool isActive' parameter added
         public async Task<IActionResult> CreateNews(string title, string description, string imageUrl, DateTime createdDate, bool isActive)
         {
             if (string.IsNullOrEmpty(imageUrl))
@@ -79,7 +79,7 @@ namespace CorporateWeb.WebUI.Controllers
                 Description = description,
                 ImageUrl = imageUrl,
                 CreatedDate = createdDate,
-                IsActive = isActive // Arayüzden gelen şalter verisini veritabanına işliyoruz EKLENDİ
+                IsActive = isActive // Persist the toggle value coming from the UI to the database
             };
 
             await _context.News.AddAsync(newInsight);
@@ -97,7 +97,7 @@ namespace CorporateWeb.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // Parametrelere 'bool isActive' eklendi
+        // 'bool isActive' parameter added
         public async Task<IActionResult> EditNews(int id, string title, string description, string imageUrl, DateTime createdDate, bool isActive)
         {
             var newsItem = await _context.News.FindAsync(id);
@@ -106,14 +106,14 @@ namespace CorporateWeb.WebUI.Controllers
             newsItem.Title = title;
             newsItem.Description = description;
             
-            // Eğer yeni resim URL'si boş gelirse eskisini koru
+            // Keep the existing image if the new image URL is empty
             if (!string.IsNullOrEmpty(imageUrl))
             {
                 newsItem.ImageUrl = imageUrl;
             }
             
             newsItem.CreatedDate = createdDate;
-            newsItem.IsActive = isActive; // Şalterin güncel durumunu veritabanına yazıyoruz EKLENDİ
+            newsItem.IsActive = isActive; // Write the current toggle state to the database
 
             _context.News.Update(newsItem);
             await _context.SaveChangesAsync();
@@ -121,7 +121,7 @@ namespace CorporateWeb.WebUI.Controllers
         }
         #endregion
 
-        #region Service Düzenleme
+        #region Service Editing
         [HttpGet]
         public async Task<IActionResult> EditService(int id)
         {

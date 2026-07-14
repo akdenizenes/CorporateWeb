@@ -4,9 +4,9 @@ def write_file(filepath, content):
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(content.strip())
-    print(f"Güncellendi: {filepath}")
+    print(f"Updated: {filepath}")
 
-# HomeController Güncellemesi
+# HomeController update
 write_file("CorporateWeb.WebUI/Controllers/HomeController.cs", """
 using Microsoft.AspNetCore.Mvc;
 using CorporateWeb.Business;
@@ -32,23 +32,23 @@ namespace CorporateWeb.WebUI.Controllers {
 }
 """)
 
-# Anasayfa (Index.cshtml)
+# Home page (Index.cshtml)
 write_file("CorporateWeb.WebUI/Views/Home/Index.cshtml", """
 @model IEnumerable<CorporateWeb.Entities.Service>
 @{
-    ViewData["Title"] = "Anasayfa";
+    ViewData["Title"] = "Home";
 }
 <div class="container my-5">
     <div class="row text-center mb-5">
-        <h1 class="display-4 fw-bold">Kurumsal Dünyamıza Hoş Geldiniz</h1>
-        <p class="lead text-muted">Geleceğin teknolojilerini profesyonel çözümlerle buluşturuyoruz.</p>
+        <h1 class="display-4 fw-bold">Welcome to Our Corporate World</h1>
+        <p class="lead text-muted">We bring the technologies of the future together with professional solutions.</p>
     </div>
 
     <div class="row g-4">
-        <h2 class="h3 border-bottom pb-2">Hizmetlerimiz</h2>
+        <h2 class="h3 border-bottom pb-2">Our Services</h2>
         @if (Model == null || !Model.Any())
         {
-            <div class="alert alert-info text-center">Henüz eklenmiş aktif bir hizmet bulunmamaktadır. Admin panelinden ekleyebilirsiniz.</div>
+            <div class="alert alert-info text-center">There are no active services yet. You can add them from the admin panel.</div>
         }
         else
         {
@@ -69,10 +69,10 @@ write_file("CorporateWeb.WebUI/Views/Home/Index.cshtml", """
 </div>
 """)
 
-# Layout (Bootstrap 5 Eklemesi)
+# Layout (Bootstrap 5 integration)
 write_file("CorporateWeb.WebUI/Views/Shared/_Layout.cshtml", """
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -100,11 +100,11 @@ write_file("CorporateWeb.WebUI/Views/Shared/_NavbarPartial.cshtml", """
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link active" href="/">Anasayfa</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Hakkımızda</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Hizmetler</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Haberler</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">İletişim</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">News</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
             </ul>
         </div>
     </div>
@@ -115,9 +115,9 @@ write_file("CorporateWeb.WebUI/Views/Shared/_NavbarPartial.cshtml", """
 write_file("CorporateWeb.WebUI/Views/Shared/_FooterPartial.cshtml", """
 <footer class="bg-dark text-light text-center py-4 mt-auto border-top border-secondary">
     <div class="container">
-        <p class="mb-0">&copy; 2026 CorporateWeb. Tüm Hakları Saklıdır.</p>
+        <p class="mb-0">&copy; 2026 CorporateWeb. All Rights Reserved.</p>
     </div>
 </footer>
 """)
 
-print("Tasarım dosyaları başarıyla güncellendi! 😎")
+print("Design files updated successfully! 😎")
